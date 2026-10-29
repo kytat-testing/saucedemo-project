@@ -10,7 +10,7 @@ Suite de automatización de pruebas E2E para [https://www.saucedemo.com/](https:
 - **Patrón de diseño:** Page Object Model (POM)
 - **Reportes:** Playwright HTML Reporter / Allure
 
-## Estructura
+## Estructura del proyecto
 
 ```
 .

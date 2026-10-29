@@ -23,7 +23,7 @@ SauceDemo (_Swag Labs_) es una tienda e-commerce de demostración mantenida por 
 | Cart                       | `/cart.html`                | Productos seleccionados, con opciones de remover, continuar comprando o ir a checkout. |
 | Checkout: Your Information | `/checkout-step-one.html`   | Formulario de First Name, Last Name y Zip/Postal Code.                                 |
 | Checkout: Overview         | `/checkout-step-two.html`   | Resumen del pedido con subtotal, impuesto y total.                                     |
-| Checkout: Complete         | `/checkout-complete.html`   | Confirmación de compra finalizada.                                                     |
+| Checkout: Complete         | `/checkout-complete.html`   | Confirmación de compra finalizada y saludos.                                           |
 
 ## Usuarios de prueba
 
