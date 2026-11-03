@@ -1,0 +1,663 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\RED5G\\Documents\\agente-qa-v2\\agente-qa-v2\\projects\\saucedemo-qa\\playwright.config.ts",
+    "rootDir": "C:/Users/RED5G/Documents/agente-qa-v2/agente-qa-v2/projects/saucedemo-qa/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 6
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "C:/Users/RED5G/Documents/agente-qa-v2/agente-qa-v2/projects/saucedemo-qa/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 6
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "C:/Users/RED5G/Documents/agente-qa-v2/agente-qa-v2/projects/saucedemo-qa/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 60000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "./reports/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "./results/resultados.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "runAgents": "none",
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.58.2",
+    "workers": 6,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "cart\\continuar-y-checkout.spec.ts",
+      "file": "cart/continuar-y-checkout.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Cart · Continue Shopping / Checkout",
+          "file": "cart/continuar-y-checkout.spec.ts",
+          "line": 6,
+          "column": 6,
+          "specs": [
+            {
+              "title": "NAV-01 Continue Shopping vuelve al inventario conservando el carrito",
+              "ok": true,
+              "tags": [
+                "navegacion"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 6436,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:46.579Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2eda7137d26558810ffb-f92faba3279493a240df",
+              "file": "cart/continuar-y-checkout.spec.ts",
+              "line": 7,
+              "column": 7
+            },
+            {
+              "title": "NAV-02 Continue Shopping con el carrito vacio vuelve al inventario",
+              "ok": true,
+              "tags": [
+                "navegacion"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 7779,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:46.473Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2eda7137d26558810ffb-014d79891ab9beee434a",
+              "file": "cart/continuar-y-checkout.spec.ts",
+              "line": 21,
+              "column": 7
+            },
+            {
+              "title": "NAV-03 seguir comprando y agregar otro producto suma al carrito existente",
+              "ok": true,
+              "tags": [
+                "navegacion"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 4469,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:46.449Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2eda7137d26558810ffb-f99436bfc4c8e321b7f3",
+              "file": "cart/continuar-y-checkout.spec.ts",
+              "line": 30,
+              "column": 7
+            },
+            {
+              "title": "NAV-04 Checkout lleva a \"Checkout: Your Information\"",
+              "ok": true,
+              "tags": [
+                "navegacion"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 6683,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:46.488Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2eda7137d26558810ffb-3fc4e9e82eb35040438c",
+              "file": "cart/continuar-y-checkout.spec.ts",
+              "line": 48,
+              "column": 7
+            },
+            {
+              "title": "NAV-05 Cancel en el checkout regresa al carrito sin perder productos",
+              "ok": true,
+              "tags": [
+                "navegacion"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 6661,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:46.513Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2eda7137d26558810ffb-cb702d5cdbfa9f327fef",
+              "file": "cart/continuar-y-checkout.spec.ts",
+              "line": 60,
+              "column": 7
+            },
+            {
+              "title": "NAV-06 el resumen del checkout muestra los mismos productos, cantidades y el total correcto",
+              "ok": true,
+              "tags": [
+                "navegacion"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 5,
+                      "status": "passed",
+                      "duration": 8536,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:46.536Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2eda7137d26558810ffb-c6897580e667ac6fe7c1",
+              "file": "cart/continuar-y-checkout.spec.ts",
+              "line": 75,
+              "column": 7
+            },
+            {
+              "title": "NAV-07 Checkout con el carrito vacio (comportamiento actual)",
+              "ok": true,
+              "tags": [
+                "navegacion"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [
+                    {
+                      "type": "observacion",
+                      "description": "SauceDemo permite iniciar el checkout sin productos. Se fija el comportamiento actual; si el sitio empieza a bloquearlo, esta prueba fallara y avisara del cambio."
+                    }
+                  ],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 6468,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:51.819Z",
+                      "annotations": [
+                        {
+                          "type": "observacion",
+                          "description": "SauceDemo permite iniciar el checkout sin productos. Se fija el comportamiento actual; si el sitio empieza a bloquearlo, esta prueba fallara y avisara del cambio."
+                        }
+                      ],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2eda7137d26558810ffb-5832d8480223e3c2bbfc",
+              "file": "cart/continuar-y-checkout.spec.ts",
+              "line": 97,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "cart\\verificacion-carrito.spec.ts",
+      "file": "cart/verificacion-carrito.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Cart · Verificacion de productos, cantidades y precios",
+          "file": "cart/verificacion-carrito.spec.ts",
+          "line": 10,
+          "column": 6,
+          "specs": [
+            {
+              "title": "CART-01 carrito vacio: sin productos y sin contador",
+              "ok": true,
+              "tags": [
+                "carrito"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 3617,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:53.782Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8349ee65cd459255bd20-06c6145fe9ade59252dd",
+              "file": "cart/verificacion-carrito.spec.ts",
+              "line": 11,
+              "column": 7
+            },
+            {
+              "title": "CART-02 un producto: nombre, descripcion, precio y cantidad 1",
+              "ok": true,
+              "tags": [
+                "carrito"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 4,
+                      "status": "passed",
+                      "duration": 4861,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:54.031Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8349ee65cd459255bd20-59a157dd2b208e2c4a21",
+              "file": "cart/verificacion-carrito.spec.ts",
+              "line": 19,
+              "column": 7
+            },
+            {
+              "title": "CART-03 varios productos: lista, precios y cantidades coinciden",
+              "ok": true,
+              "tags": [
+                "carrito"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 4455,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:54.168Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8349ee65cd459255bd20-456db546a05f4715f4e1",
+              "file": "cart/verificacion-carrito.spec.ts",
+              "line": 30,
+              "column": 7
+            },
+            {
+              "title": "CART-04 los 6 productos: el contador coincide con la suma de cantidades y el total con el catalogo",
+              "ok": true,
+              "tags": [
+                "carrito"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "passed",
+                      "duration": 5419,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:55.400Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8349ee65cd459255bd20-20d1be9ccca4ba7dacd2",
+              "file": "cart/verificacion-carrito.spec.ts",
+              "line": 43,
+              "column": 7
+            },
+            {
+              "title": "CART-05 los precios del inventario coinciden con el catalogo esperado",
+              "ok": true,
+              "tags": [
+                "carrito"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 5,
+                      "status": "passed",
+                      "duration": 5709,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:55.922Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8349ee65cd459255bd20-1a593fb3960631b6b30b",
+              "file": "cart/verificacion-carrito.spec.ts",
+              "line": 59,
+              "column": 7
+            },
+            {
+              "title": "CART-06 quitar un producto actualiza la lista y el contador",
+              "ok": true,
+              "tags": [
+                "carrito"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 5320,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:57.458Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8349ee65cd459255bd20-a7615a6cd301e7aa929e",
+              "file": "cart/verificacion-carrito.spec.ts",
+              "line": 68,
+              "column": 7
+            },
+            {
+              "title": "CART-07 quitar todos deja el carrito vacio y sin contador",
+              "ok": true,
+              "tags": [
+                "carrito"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "passed",
+                      "duration": 3425,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:58.367Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8349ee65cd459255bd20-3139e593547e8917fb83",
+              "file": "cart/verificacion-carrito.spec.ts",
+              "line": 81,
+              "column": 7
+            },
+            {
+              "title": "CART-08 el carrito se conserva al recargar la pagina",
+              "ok": true,
+              "tags": [
+                "carrito"
+              ],
+              "tests": [
+                {
+                  "timeout": 60000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 3795,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-11-03T15:57:58.688Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "8349ee65cd459255bd20-b9ac073b41d83c60e07a",
+              "file": "cart/verificacion-carrito.spec.ts",
+              "line": 91,
+              "column": 7
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-03T15:57:42.916Z",
+    "duration": 20360.593999999997,
+    "expected": 15,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

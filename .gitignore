@@ -1,0 +1,4 @@
+node_modules/
+test-results/
+playwright-report/
+# Se versiona el reporte HTML de Playwright (reports/html) y el resumen (reports/*.html).
