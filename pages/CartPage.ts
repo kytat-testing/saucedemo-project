@@ -44,4 +44,13 @@ export class CartPage extends BasePage {
   async expectCantidadDeItems(n: number) {
     await expect(this.items).toHaveCount(n);
   }
+
+  /** Encabezados de la lista («QTY» / «Description»). */
+  get etiquetaCantidad(): Locator {
+    return this.page.getByTestId('cart-quantity-label');
+  }
+
+  get etiquetaDescripcion(): Locator {
+    return this.page.getByTestId('cart-desc-label');
+  }
 }

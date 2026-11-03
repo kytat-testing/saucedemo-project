@@ -1,0 +1,74 @@
+{
+  "name": "SauceDemo_Inventory",
+  "project": "saucedemo",
+  "baseUrl": "https://www.saucedemo.com",
+  "generatedAt": "2026-11-03",
+  "source": "scan_page + get_page_elements + generate_map (qa-agent) sobre la pagina real, sesion standard_user, carrito VACIO al escanear",
+  "framework": "unknown (React: ids react-burger-*)",
+  "notaSelectores": "get_page_elements/generate_map NO devuelven atributos data-test. Los id/name de abajo estan CONFIRMADOS. Los data-test se listan aparte como ESPERADOS (no vistos) hasta que el Executor los verifique con locator('[data-test=...]').",
+  "pages": {
+    "inventory": {
+      "url": "/inventory.html",
+      "title": "Products",
+      "auth": "requiere sesion; sin ella redirige a / con 'Epic sadface: You can only access '/inventory.html' when you are logged in.'",
+      "warnings": [
+        { "type": "guia_sin_cursor_pointer", "severity": "low", "element": "A", "message": "Elemento clickeable \"A\" no tiene cursor: pointer (tiene: auto)", "nota": "scan no dice cual <a>; repetido en las 3 paginas -> probablemente header (enlace del carrito). Por confirmar." }
+      ],
+      "overlay": { "spinnerVisible": false, "modalVisible": false },
+      "dependencies": [],
+      "confirmed": {
+        "menuButton": "#react-burger-menu-btn",
+        "resetAppState": "#reset_sidebar_link",
+        "cartLink": "header <a> sin texto ni id (index 7 en get_page_elements) - clase/data-test no capturados",
+        "sortSelect": "select (sin id/name; 4 opciones: Name (A to Z), Name (Z to A), Price (low to high), Price (high to low)) - FUERA DE ALCANCE",
+        "products": [
+          { "itemId": 4, "name": "Sauce Labs Backpack", "price": "$29.99", "slug": "sauce-labs-backpack", "titleLink": "#item_4_title_link", "imgLink": "#item_4_img_link", "addButton": "#add-to-cart-sauce-labs-backpack" },
+          { "itemId": 0, "name": "Sauce Labs Bike Light", "price": "$9.99", "slug": "sauce-labs-bike-light", "titleLink": "#item_0_title_link", "imgLink": "#item_0_img_link", "addButton": "#add-to-cart-sauce-labs-bike-light" },
+          { "itemId": 1, "name": "Sauce Labs Bolt T-Shirt", "price": "$15.99", "slug": "sauce-labs-bolt-t-shirt", "titleLink": "#item_1_title_link", "imgLink": "#item_1_img_link", "addButton": "#add-to-cart-sauce-labs-bolt-t-shirt" },
+          { "itemId": 5, "name": "Sauce Labs Fleece Jacket", "price": "$49.99", "slug": "sauce-labs-fleece-jacket", "titleLink": "#item_5_title_link", "imgLink": "#item_5_img_link", "addButton": "#add-to-cart-sauce-labs-fleece-jacket" },
+          { "itemId": 2, "name": "Sauce Labs Onesie", "price": "$7.99", "slug": "sauce-labs-onesie", "titleLink": "#item_2_title_link", "imgLink": "#item_2_img_link", "addButton": "#add-to-cart-sauce-labs-onesie" },
+          { "itemId": 3, "name": "Test.allTheThings() T-Shirt (Red)", "price": "$15.99", "slug": "test.allthethings()-t-shirt-(red)", "titleLink": "#item_3_title_link", "imgLink": "#item_3_img_link", "addButton": "[id=\"add-to-cart-test.allthethings()-t-shirt-(red)\"]" }
+        ]
+      },
+      "expectedNotVerified": {
+        "addButton": "[data-test=\"add-to-cart-<slug>\"]",
+        "removeButton": "#remove-<slug> / [data-test=\"remove-<slug>\"]",
+        "inventoryItem": "[data-test=\"inventory-item\"]",
+        "itemName": "[data-test=\"inventory-item-name\"]",
+        "itemPrice": "[data-test=\"inventory-item-price\"]",
+        "cartLink": "[data-test=\"shopping-cart-link\"] / .shopping_cart_link",
+        "cartBadge": "[data-test=\"shopping-cart-badge\"] / .shopping_cart_badge",
+        "sortSelect": "[data-test=\"product-sort-container\"]"
+      }
+    },
+    "cart": {
+      "url": "/cart.html",
+      "title": "Your Cart",
+      "estadoAlEscanear": "vacio: solo encabezados QTY / Description, sin filas",
+      "warnings": [ { "type": "guia_sin_cursor_pointer", "severity": "low", "element": "A" } ],
+      "confirmed": {
+        "continueShopping": "#continue-shopping",
+        "checkout": "#checkout (FUERA DE ALCANCE; habilitado con carrito vacio)"
+      },
+      "expectedNotVerified": {
+        "cartItem": "[data-test=\"inventory-item\"] / .cart_item",
+        "itemQuantity": "[data-test=\"item-quantity\"]",
+        "removeInCart": "[data-test=\"remove-<slug>\"]"
+      }
+    },
+    "detail": {
+      "url": "/inventory-item.html?id=<itemId>",
+      "scannedWith": "id=4 (Sauce Labs Backpack, $29.99)",
+      "warnings": [ { "type": "guia_sin_cursor_pointer", "severity": "low", "element": "A" } ],
+      "confirmed": {
+        "backToProducts": "#back-to-products",
+        "addButton": "#add-to-cart  (SIN slug: distinto del inventario)"
+      },
+      "expectedNotVerified": {
+        "removeButton": "#remove / [data-test=\"remove\"]",
+        "itemName": "[data-test=\"inventory-item-name\"]",
+        "itemPrice": "[data-test=\"inventory-item-price\"]"
+      }
+    }
+  }
+}

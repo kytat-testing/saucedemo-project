@@ -4,6 +4,7 @@ import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutInformationPage } from '../pages/CheckoutInformationPage';
 import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage';
+import { ProductDetailPage } from '../pages/ProductDetailPage';
 import { USUARIOS } from '../data/users';
 
 interface Paginas {
@@ -12,6 +13,7 @@ interface Paginas {
   cartPage: CartPage;
   checkoutInfoPage: CheckoutInformationPage;
   checkoutOverviewPage: CheckoutOverviewPage;
+  productDetailPage: ProductDetailPage;
 }
 
 /**
@@ -30,6 +32,7 @@ export const test = base.extend<Paginas>({
   cartPage: async ({ page }, use) => use(new CartPage(page)),
   checkoutInfoPage: async ({ page }, use) => use(new CheckoutInformationPage(page)),
   checkoutOverviewPage: async ({ page }, use) => use(new CheckoutOverviewPage(page)),
+  productDetailPage: async ({ page }, use) => use(new ProductDetailPage(page)),
 });
 
 export { expect } from '@playwright/test';

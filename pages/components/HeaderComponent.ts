@@ -22,4 +22,27 @@ export class HeaderComponent {
       await expect(this.contadorCarrito).toHaveText(String(cantidad));
     }
   }
+
+  /** Lectura del contador (0 si no existe). */
+  async contador(): Promise<number> {
+    if ((await this.contadorCarrito.count()) === 0) return 0;
+    return Number((await this.contadorCarrito.innerText()).trim());
+  }
+
+  /**
+   * aria-label del enlace: «Cart, empty» / «Cart, N items». El enlace no tiene
+   * texto, id ni href y su rol es "button": solo se encuentra por data-test.
+   */
+  async ariaLabel(): Promise<string | null> {
+    return this.enlaceCarrito.getAttribute('aria-label');
+  }
+
+  async expectAriaLabel(texto: string) {
+    await expect(this.enlaceCarrito).toHaveAttribute('aria-label', texto);
+  }
+
+  /** `cursor` computado del enlace (hoy devuelve "auto"; la guia pide "pointer"). */
+  async cursor(): Promise<string> {
+    return this.enlaceCarrito.evaluate((el) => getComputedStyle(el).cursor);
+  }
 }
