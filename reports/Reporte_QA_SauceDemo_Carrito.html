@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reporte QA SauceDemo Carrito</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --text: #1d2330; --muted: #5d6676; --line: #e2e5ea;
+    --ok: #1f7a4d; --ok-bg: #e5f4ec; --warn: #8a5a00; --warn-bg: #fdf1d9; --accent: #3b4fd8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #12151b; --card: #1b1f27; --text: #e6e9ef; --muted: #9aa3b2; --line: #2c323d;
+      --ok: #5fd39a; --ok-bg: #173327; --warn: #f2c063; --warn-bg: #3a2e14; --accent: #8c9bff;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #12151b; --card: #1b1f27; --text: #e6e9ef; --muted: #9aa3b2; --line: #2c323d;
+    --ok: #5fd39a; --ok-bg: #173327; --warn: #f2c063; --warn-bg: #3a2e14; --accent: #8c9bff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 980px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { font-size: 26px; margin: 0 0 4px; }
+  h2 { font-size: 18px; margin: 32px 0 12px; }
+  .sub { color: var(--muted); margin: 0 0 24px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .kpi { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .kpi b { display: block; font-size: 24px; }
+  .kpi span { color: var(--muted); font-size: 13px; }
+  .veredicto { background: var(--ok-bg); color: var(--ok); border-radius: 10px; padding: 14px 16px;
+               margin: 20px 0 0; font-weight: 600; }
+  .tabla { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+  table { width: 100%; border-collapse: collapse; min-width: 560px; }
+  th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 13px; color: var(--muted); font-weight: 600; }
+  tr:last-child td { border-bottom: 0; }
+  td.num { text-align: right; white-space: nowrap; color: var(--muted); }
+  .tag { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 600; }
+  .ok { background: var(--ok-bg); color: var(--ok); }
+  .warn { background: var(--warn-bg); color: var(--warn); }
+  .nota { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--warn);
+          border-radius: 10px; padding: 12px 16px; margin: 10px 0; }
+  .nota.info { border-left-color: var(--accent); }
+  code { font-size: 13px; background: var(--bg); padding: 1px 5px; border-radius: 4px; }
+  footer { color: var(--muted); font-size: 13px; margin-top: 32px; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Reporte QA · SauceDemo · Carrito</h1>
+  <p class="sub">https://www.saucedemo.com · usuario <code>standard_user</code> · ejecutado el 03-nov-2026 10:57 (hora Colombia) · Playwright 1.58.2 · Chromium · POM</p>
+
+  <div class="kpis">
+    <div class="kpi"><b>15</b><span>pruebas</span></div>
+    <div class="kpi"><b style="color:var(--ok)">15</b><span>en verde</span></div>
+    <div class="kpi"><b>0</b><span>defectos</span></div>
+    <div class="kpi"><b>1</b><span>observación</span></div>
+    <div class="kpi"><b>20,4 s</b><span>duración total</span></div>
+  </div>
+  <div class="veredicto">✅ Los dos puntos pedidos CUMPLEN: verificación del carrito (8/8) y Continue Shopping / Checkout (7/7).</div>
+
+  <h2>1. Verificación de productos, cantidades y precios</h2>
+  <div class="tabla"><table>
+    <thead><tr><th>Id</th><th>Caso</th><th>Resultado</th><th>Duración</th></tr></thead>
+    <tbody>
+      <tr><td>CART-01</td><td>Carrito vacío: sin productos y sin contador</td><td><span class="tag ok">Pasó</span></td><td class="num">3,6 s</td></tr>
+      <tr><td>CART-02</td><td>Un producto: nombre, descripción, precio y cantidad 1</td><td><span class="tag ok">Pasó</span></td><td class="num">4,9 s</td></tr>
+      <tr><td>CART-03</td><td>Varios productos (3): lista, orden, precios y cantidades</td><td><span class="tag ok">Pasó</span></td><td class="num">4,5 s</td></tr>
+      <tr><td>CART-04</td><td>Los 6 productos: contador = suma de cantidades; total = catálogo ($145.94)</td><td><span class="tag ok">Pasó</span></td><td class="num">5,4 s</td></tr>
+      <tr><td>CART-05</td><td>Precios del inventario = catálogo esperado (6/6)</td><td><span class="tag ok">Pasó</span></td><td class="num">5,7 s</td></tr>
+      <tr><td>CART-06</td><td>Quitar un producto actualiza la lista y el contador</td><td><span class="tag ok">Pasó</span></td><td class="num">5,3 s</td></tr>
+      <tr><td>CART-07</td><td>Quitar todos deja el carrito vacío y sin contador</td><td><span class="tag ok">Pasó</span></td><td class="num">3,4 s</td></tr>
+      <tr><td>CART-08</td><td>El carrito se conserva al recargar la página</td><td><span class="tag ok">Pasó</span></td><td class="num">3,8 s</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>2. Continue Shopping / Checkout</h2>
+  <div class="tabla"><table>
+    <thead><tr><th>Id</th><th>Caso</th><th>Resultado</th><th>Duración</th></tr></thead>
+    <tbody>
+      <tr><td>NAV-01</td><td>Continue Shopping vuelve al inventario conservando el carrito</td><td><span class="tag ok">Pasó</span></td><td class="num">6,4 s</td></tr>
+      <tr><td>NAV-02</td><td>Continue Shopping con el carrito vacío</td><td><span class="tag ok">Pasó</span></td><td class="num">7,8 s</td></tr>
+      <tr><td>NAV-03</td><td>Seguir comprando y agregar otro producto suma al carrito existente</td><td><span class="tag ok">Pasó</span></td><td class="num">4,5 s</td></tr>
+      <tr><td>NAV-04</td><td>Checkout lleva a «Checkout: Your Information» con sus 3 campos</td><td><span class="tag ok">Pasó</span></td><td class="num">6,7 s</td></tr>
+      <tr><td>NAV-05</td><td>Cancel en el checkout regresa al carrito sin perder productos</td><td><span class="tag ok">Pasó</span></td><td class="num">6,7 s</td></tr>
+      <tr><td>NAV-06</td><td>El resumen del checkout repite productos y cantidades; subtotal = catálogo y total = subtotal + impuesto</td><td><span class="tag ok">Pasó</span></td><td class="num">8,5 s</td></tr>
+      <tr><td>NAV-07</td><td>Checkout con el carrito vacío (fija el comportamiento actual)</td><td><span class="tag warn">Pasó · OBS-1</span></td><td class="num">6,5 s</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>Observaciones</h2>
+  <div class="nota"><b>OBS-1 · Checkout con carrito vacío permitido.</b> El botón <i>Checkout</i> lleva a «Your Information» aunque no haya productos. NAV-07 fija este comportamiento: si el sitio empieza a bloquearlo, la prueba fallará y avisará del cambio. Si debe impedirse es decisión de producto.</div>
+  <div class="nota info"><b>Cantidades.</b> SauceDemo no permite cambiar la cantidad: cada producto entra con <code>item-quantity = 1</code>. Se verifica la cantidad 1 por fila y que el contador del carrito sea igual a la suma de las cantidades.</div>
+  <div class="nota info"><b>Método.</b> Cada fila del carrito se compara con dos oráculos independientes: lo que mostraba el inventario al agregar y el catálogo de <code>data/products.ts</code>. Así, un precio mal pintado en las dos pantallas también falla.</div>
+
+  <h2>Cómo reproducir</h2>
+  <p>Desde <code>projects/saucedemo-qa</code>: <code>npm test</code> (o el panel <i>Testing</i> de VS Code con la extensión <i>Playwright Test for VSCode</i>). Detalle técnico en <a href="html/index.html">el reporte de Playwright</a> y en <code>results/RESULTADOS_Carrito.md</code>.</p>
+
+  <footer>Sesión 63 · agente-qa-v2 · proyecto <code>projects/saucedemo-qa/</code></footer>
+</main>
+</body>
+</html>
