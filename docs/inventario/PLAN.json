@@ -1,0 +1,366 @@
+{
+  "proyecto": "saucedemo",
+  "modulo": "Inventario — agregar/remover productos y contador del carrito",
+  "url": "https://www.saucedemo.com",
+  "prd": "docs/inventario/PRD.md",
+  "mapa": "docs/inventario/mapa-elementos.json",
+  "specs": [
+    "tests/inventory/agregar-remover.spec.ts",
+    "tests/inventory/contador-carrito.spec.ts"
+  ],
+  "generadoPor": "qa-planner",
+  "fecha": "2026-11-03",
+  "alcance": "ESTRICTO (pedido de la usuaria): agregar y remover productos en /inventory.html (individual y multiple) y el contador (badge) del icono del carrito. /cart.html y /inventory-item.html?id=N solo para contrastar el badge. Login = precondicion (standard_user / secret_sauce, publicas). Fuera: checkout, sort, menu, login negativo, otros usuarios, Reset App State.",
+  "usuario": "standard_user / secret_sauce",
+  "aislamiento": "Contexto nuevo por test + borrar localStorage['cart-contents'] + page.reload(); se afirma la precondicion (sin badge, 6 «Add to cart»). NO se usa Reset App State (deja botones desfasados, PRD P-R).",
+  "fuentesSelectores": [
+    "PRD §4.1–§4.3: todos los data-test [V] (leidos con evaluate por el Executor el 2026-11-03)",
+    "knowledge/page-snapshots.json › https://www.saucedemo.com/ : #user-name, #password, #login-button (solo precondicion)",
+    "docs/inventario/mapa-elementos.json: itemId, slug, #continue-shopping, #back-to-products"
+  ],
+  "selectoresFragiles": [],
+  "notaSelectores": "Ningun selector inventado. `.cart_item` (clase) se usa para contar filas del carrito por la trampa 10 (PRD §4.2 la da como [V]). El boton de la tarjeta se toma como `tarjeta(nombre) >> button` para sobrevivir al cambio de data-test (trampa 4).",
+  "estandarRed5G": {
+    "categoriasDetectadas": ["id_url"],
+    "aplicacion": "id_url (inventory-item.html?id=N) queda FUERA DE ALCANCE: el detalle no es funcionalidad bajo prueba (PRD §1 y §8). Del cierre universal se toman negativo/controles/bordes/copy por TC (campo `regla1`). Guia GDD-DDS-G-03 `guia_sin_cursor_pointer` del icono → TC-13."
+  },
+  "learningBriefing": "Sin tips ni selectorWarnings para www.saucedemo.com (2026-11-03).",
+  "leyendaRegla1": "AUTOMATIZADO = hay un test.step con el prefijo [NEG]/[CTRL]/[BORDE]/[COPY] en la spec; NO APLICA = el componente no tiene esa dimension en esta pantalla (con motivo).",
+  "testCases": [
+    {
+      "id": "TC-01",
+      "titulo": "Estado inicial: sin badge, 6 «Add to cart» y catalogo completo",
+      "criterio": "CA-4 (borde 0), O-2",
+      "prioridad": "Alta",
+      "spec": "tests/inventory/agregar-remover.spec.ts",
+      "precondicion": "Sesion standard_user en /inventory.html con cart-contents borrado y recarga",
+      "pasos": [
+        "Leer el badge, los botones y localStorage['cart-contents']",
+        "Recorrer las 6 tarjetas por nombre exacto: precio y texto del boton"
+      ],
+      "esperado": [
+        "[data-test=\"shopping-cart-badge\"] con count 0 (no «0»)",
+        "0 botones remove-*, 6 add-to-cart-* con «Add to cart»",
+        "aria-label del enlace = «Cart, empty»; titulo «Products»",
+        "Nombres y precios = PRD §3"
+      ],
+      "regla1": {
+        "negativo": "AUTOMATIZADO: ningun «Remove» ni id en storage con el carrito vacio",
+        "controles": "NO APLICA en este TC (estado de partida, no hay accion); los 6 botones se ejercen en TC-04",
+        "bordes": "AUTOMATIZADO: limite inferior 0 → badge ausente del DOM",
+        "copy": "AUTOMATIZADO: «Products», «Add to cart» x6, «Cart, empty», 6 nombres y precios"
+      },
+      "evidenciaPRD": "00_inventario_inicial_vacio.png",
+      "estado": "NO EJECUTADO"
+    },
+    {
+      "id": "TC-02",
+      "titulo": "Agregar 1 producto: badge «1» y el boton pasa a «Remove»",
+      "criterio": "CA-1, P-1",
+      "prioridad": "Alta",
+      "spec": "tests/inventory/agregar-remover.spec.ts",
+      "precondicion": "Carrito vacio (fixture inventoryPage)",
+      "pasos": ["Clic en [data-test=\"add-to-cart-sauce-labs-backpack\"]"],
+      "esperado": [
+        "Badge «1»; boton [data-test=\"remove-sauce-labs-backpack\"] con «Remove»; add-to-cart-sauce-labs-backpack ya no existe",
+        "cart-contents = [4]",
+        "Los otros 5 siguen en «Add to cart»"
+      ],
+      "regla1": {
+        "negativo": "AUTOMATIZADO: exactamente 1 «Remove»; los otros 5 no cambian",
+        "controles": "AUTOMATIZADO: boton «Add to cart» de Backpack",
+        "bordes": "AUTOMATIZADO: transicion 0 → 1 (aparece el badge)",
+        "copy": "AUTOMATIZADO: «Remove»"
+      },
+      "evidenciaPRD": "P1_agregar_1_badge_1.png",
+      "estado": "NO EJECUTADO"
+    },
+    {
+      "id": "TC-03",
+      "titulo": "Agregar 2 productos (incluye el slug con «.» y «()»): badge «2»",
+      "criterio": "CA-2, P-2, trampa 2",
+      "prioridad": "Alta",
+      "spec": "tests/inventory/agregar-remover.spec.ts",
+      "precondicion": "Carrito vacio",
+      "pasos": [
+        "Agregar Sauce Labs Bike Light → badge «1»",
+        "Agregar Test.allTheThings() T-Shirt (Red) via [data-test=\"add-to-cart-test.allthethings()-t-shirt-(red)\"] → badge «2»"
+      ],
+      "esperado": ["Badge «2»", "cart-contents = [0,3] (orden de insercion)", "2 «Remove», 4 «Add to cart»"],
+      "regla1": {
+        "negativo": "AUTOMATIZADO: sin duplicados en storage; los otros 4 intactos",
+        "controles": "AUTOMATIZADO: 2 botones «Add to cart»",
+        "bordes": "AUTOMATIZADO: slug con caracteres especiales ('.' y '()')",
+        "copy": "AUTOMATIZADO via esperarEnCarrito: «Remove» en ambos"
+      },
+      "evidenciaPRD": "P5_recarga_badge_2_persiste.png (mismo par de productos)",
+      "estado": "NO EJECUTADO"
+    },
+    {
+      "id": "TC-04",
+      "titulo": "Agregar los 6: el badge sube de a uno hasta «6»",
+      "criterio": "CA-2, P-2",
+      "prioridad": "Alta",
+      "spec": "tests/inventory/agregar-remover.spec.ts",
+      "precondicion": "Carrito vacio",
+      "pasos": ["Agregar los 6 productos uno por uno (por slug), leyendo el badge tras cada clic"],
+      "esperado": [
+        "Badge 1 → 2 → 3 → 4 → 5 → 6",
+        "6 «Remove», 0 «Add to cart»",
+        "cart-contents con los 6 itemId sin duplicados"
+      ],
+      "regla1": {
+        "negativo": "AUTOMATIZADO: no hay ids repetidos ni badge mayor a 6",
+        "controles": "AUTOMATIZADO: los 6 botones «Add to cart»",
+        "bordes": "AUTOMATIZADO: limite superior = 6 (todo el catalogo)",
+        "copy": "AUTOMATIZADO: «Remove» en los 6"
+      },
+      "evidenciaPRD": "P2_agregar_6_badge_6.png",
+      "estado": "NO EJECUTADO"
+    },
+    {
+      "id": "TC-05",
+      "titulo": "Remover 1 de varios: badge N-1 y el boton vuelve a «Add to cart»",
+      "criterio": "CA-3, P-3",
+      "prioridad": "Alta",
+      "spec": "tests/inventory/agregar-remover.spec.ts",
+      "precondicion": "Carrito con Backpack, Fleece Jacket y Onesie (badge «3»)",
+      "pasos": ["Clic en [data-test=\"remove-sauce-labs-onesie\"]"],
+      "esperado": [
+        "Badge «2»",
+        "Onesie vuelve a add-to-cart-sauce-labs-onesie / «Add to cart»",
+        "Backpack y Fleece siguen en «Remove»; cart-contents = [4,5]"
+      ],
+      "regla1": {
+        "negativo": "AUTOMATIZADO: remover uno no altera los demas ni deja el id en storage",
+        "controles": "AUTOMATIZADO: boton «Remove»",
+        "bordes": "AUTOMATIZADO: transicion N → N-1 (3 → 2)",
+        "copy": "AUTOMATIZADO: «Add to cart» al volver"
+      },
+      "evidenciaPRD": "P3_remover_1_badge_5.png",
+      "estado": "NO EJECUTADO"
+    },
+    {
+      "id": "TC-06",
+      "titulo": "Remover todos: el badge desaparece del DOM (no queda «0»)",
+      "criterio": "CA-4, P-4, trampas 3 y 11",
+      "prioridad": "Alta",
+      "spec": "tests/inventory/agregar-remover.spec.ts",
+      "precondicion": "Carrito con Bolt T-Shirt, Bike Light y la camiseta roja (badge «3»)",
+      "pasos": ["Remover los 3 de a uno, leyendo el badge tras cada clic"],
+      "esperado": [
+        "Badge 2 → 1 → sin badge (count 0)",
+        "aria-label «Cart, empty»",
+        "cart-contents vacio (\"[]\" o null) y los 6 en «Add to cart»"
+      ],
+      "regla1": {
+        "negativo": "AUTOMATIZADO: ningun «Remove» residual; storage vacio",
+        "controles": "AUTOMATIZADO: 3 botones «Remove»",
+        "bordes": "AUTOMATIZADO: transicion 1 → 0 (el badge no muestra «0», se elimina)",
+        "copy": "AUTOMATIZADO: «Cart, empty»"
+      },
+      "evidenciaPRD": "P4_remover_todos_sin_badge.png",
+      "estado": "NO EJECUTADO"
+    },
+    {
+      "id": "TC-07",
+      "titulo": "Clics rapidos repetidos alternan el estado y no duplican el conteo",
+      "criterio": "P-D (negativo del cierre universal, PRD §8)",
+      "prioridad": "Media",
+      "spec": "tests/inventory/agregar-remover.spec.ts",
+      "precondicion": "Carrito vacio",
+      "pasos": [
+        "2 clics seguidos sobre el boton de Bolt T-Shirt (ubicado por la tarjeta)",
+        "3 clics seguidos sobre el mismo boton",
+        "Doble clic nativo (dblclick) sobre el mismo boton"
+      ],
+      "esperado": [
+        "Tras 2 clics: sin badge, «Add to cart», storage vacio",
+        "Tras 3 clics: badge «1», «Remove», cart-contents = [1]",
+        "Tras el doble clic: sigue en «1», sin ids duplicados"
+      ],
+      "regla1": {
+        "negativo": "AUTOMATIZADO: rafaga de clics no duplica ids ni desfasa badge/boton",
+        "controles": "AUTOMATIZADO: el mismo boton en sus dos estados",
+        "bordes": "AUTOMATIZADO: dblclick nativo (el MCP no lo tenia; nuevo respecto a la exploracion)",
+        "copy": "AUTOMATIZADO via esperarEnCarrito/esperarFueraDelCarrito"
+      },
+      "nota": "El dblclick nativo NO se observo en la exploracion (P-D uso clics sueltos). Si falla solo ese paso, el Executor confirma a mano antes de levantar defecto (Regla 2a).",
+      "evidenciaPRD": "DOBLECLIC_01_dos_clics_seguidos.png, DOBLECLIC_02_tres_clics_badge_1.png",
+      "estado": "NO EJECUTADO"
+    },
+    {
+      "id": "TC-08",
+      "titulo": "El contador persiste tras page.reload() y al volver a entrar",
+      "criterio": "CA-6, P-5",
+      "prioridad": "Alta",
+      "spec": "tests/inventory/contador-carrito.spec.ts",
+      "precondicion": "Carrito con Bike Light y la camiseta roja (badge «2»)",
+      "pasos": ["page.reload()", "Navegar de nuevo a /inventory.html"],
+      "esperado": [
+        "Badge «2» tras la recarga y tras la navegacion",
+        "Solo esos 2 en «Remove»; cart-contents = \"[0,3]\""
+      ],
+      "regla1": {
+        "negativo": "AUTOMATIZADO: la recarga no agrega ni revive otros productos",
+        "controles": "AUTOMATIZADO: recarga real y re-navegacion",
+        "bordes": "NO APLICA (no hay limites en la persistencia; el borde 0 lo cubre TC-06)",
+        "copy": "NO APLICA (sin texto nuevo; lo cubren TC-02/TC-12)"
+      },
+      "evidenciaPRD": "P5_recarga_real_badge_2_persiste.png",
+      "estado": "NO EJECUTADO"
+    },
+    {
+      "id": "TC-09",
+      "titulo": "Coherencia: el badge es igual a las filas de /cart.html y se conserva al volver",
+      "criterio": "CA-5, CA-6, P-6",
+      "prioridad": "Alta",
+      "spec": "tests/inventory/contador-carrito.spec.ts",
+      "precondicion": "Carrito con Bike Light y la camiseta roja (badge «2»)",
+      "pasos": [
+        "Clic fisico en [data-test=\"shopping-cart-link\"]",
+        "Contar .cart_item y leer nombre/precio/QTY",
+        "Clic en [data-test=\"continue-shopping\"]"
+      ],
+      "esperado": [
+        "/cart.html en la misma pestana; 2 filas = badge «2»; QTY «1»; precios $9.99 y $15.99",
+        "Encabezados «QTY» y «Description»",
+        "De vuelta: badge «2» y los mismos 2 «Remove»"
+      ],
+      "regla1": {
+        "negativo": "AUTOMATIZADO: no aparecen en el carrito productos no agregados",
+        "controles": "AUTOMATIZADO: icono del carrito y «Continue Shopping»",
+        "bordes": "NO APLICA aqui (borde 0 filas en TC-10)",
+        "copy": "AUTOMATIZADO: «QTY», «Description», nombres y precios"
+      },
+      "evidenciaPRD": "P6_cart_2_filas_badge_2.png, P6_continue_shopping_conserva_2.png",
+      "estado": "NO EJECUTADO"
+    },
+    {
+      "id": "TC-10",
+      "titulo": "Remover desde /cart.html baja el badge y se refleja en el inventario",
+      "criterio": "CA-5, P-6, trampa 10",
+      "prioridad": "Alta",
+      "spec": "tests/inventory/contador-carrito.spec.ts",
+      "precondicion": "Carrito con Bike Light y la camiseta roja, abierto en /cart.html",
+      "pasos": [
+        "Remove de Bike Light en el carrito",
+        "Continue Shopping y revisar el inventario",
+        "Volver al carrito y remover la ultima fila",
+        "Continue Shopping"
+      ],
+      "esperado": [
+        "1 fila .cart_item, badge «1», cart-contents = [3]",
+        "En el inventario: Bike Light «Add to cart», camiseta roja «Remove»",
+        "Ultima fila removida: 0 filas y sin badge",
+        "Inventario con los 6 en «Add to cart»"
+      ],
+      "regla1": {
+        "negativo": "AUTOMATIZADO: ningun boton queda desfasado tras vaciar desde el carrito",
+        "controles": "AUTOMATIZADO: «Remove» del carrito, icono, «Continue Shopping»",
+        "bordes": "AUTOMATIZADO: carrito 1 → 0 filas (badge ausente)",
+        "copy": "AUTOMATIZADO via esperarFueraDelCarrito («Add to cart»)"
+      },
+      "evidenciaPRD": "P6_remove_desde_cart_badge_1.png, P6_inventario_tras_remove_en_cart.png, P6_cart_vacio_tras_remove.png",
+      "estado": "NO EJECUTADO"
+    },
+    {
+      "id": "TC-11",
+      "titulo": "Agregar/remover desde el detalle mueve el mismo contador",
+      "criterio": "CA-7, P-7, trampa 1",
+      "prioridad": "Media",
+      "spec": "tests/inventory/contador-carrito.spec.ts",
+      "precondicion": "Carrito con la camiseta roja (badge «1»)",
+      "pasos": [
+        "Entrar al detalle de Backpack por [data-test=\"item-4-title-link\"]",
+        "Clic en [data-test=\"add-to-cart\"] (generico)",
+        "Back to products",
+        "Entrar al detalle de la camiseta roja y clic en [data-test=\"remove\"]",
+        "Back to products"
+      ],
+      "esperado": [
+        "Detalle: nombre y precio de Backpack; sin botones con slug",
+        "Badge «2», boton «Remove», cart-contents = [3,4]; en el inventario Backpack «Remove»",
+        "Detalle id=3 abre con «Remove»; clic → badge «1»; en el inventario la camiseta roja vuelve a «Add to cart»; cart-contents = [4]"
+      ],
+      "regla1": {
+        "negativo": "AUTOMATIZADO: en el detalle no existen add-to-cart-<slug>/remove-<slug> ni «Remove» antes de agregar",
+        "controles": "AUTOMATIZADO: enlace del titulo, add-to-cart, remove, back-to-products",
+        "bordes": "NO APLICA (sin limites; el contador ya se rompe en TC-04/TC-06)",
+        "copy": "AUTOMATIZADO: «Add to cart»/«Remove» del detalle, nombre y precio"
+      },
+      "evidenciaPRD": "P7_detalle_id4_add_badge_2.png, P7_volver_inventario_backpack_remove.png, P7_detalle_id3_remove_badge_1.png, P7_volver_inventario_red_add.png",
+      "estado": "NO EJECUTADO"
+    },
+    {
+      "id": "TC-12",
+      "titulo": "aria-label del icono: «Cart, empty» / «Cart, N items» / «Cart, 1 item»",
+      "tags": ["@defecto-conocido"],
+      "criterio": "Copy/accesibilidad del icono (P-1, PRD §4.1)",
+      "prioridad": "Baja",
+      "spec": "tests/inventory/contador-carrito.spec.ts",
+      "precondicion": "Carrito vacio",
+      "pasos": [
+        "Leer aria-label vacio",
+        "Agregar Onesie y Fleece Jacket → leer aria-label",
+        "Remover Fleece Jacket → leer aria-label con 1 producto"
+      ],
+      "esperado": ["«Cart, empty»", "«Cart, 2 items»", "«Cart, 1 item» (singular)"],
+      "resultadoEsperadoHoy": "FALLA en el ultimo paso: la app dice «Cart, 1 items» (observado por el Executor, PRD P-1). Se modela con el texto correcto a proposito: el TC pasa cuando se corrija. Posible defecto de copy, severidad BAJA. El valor observado queda en la anotacion `aria-label-observado` del reporte.",
+      "regla1": {
+        "negativo": "NO APLICA (atributo de solo lectura)",
+        "controles": "AUTOMATIZADO: agregar/remover para mover el conteo",
+        "bordes": "AUTOMATIZADO: 0, 2 y el singular 1",
+        "copy": "AUTOMATIZADO: gramatica singular/plural del aria-label"
+      },
+      "estado": "NO EJECUTADO"
+    },
+    {
+      "id": "TC-13",
+      "titulo": "El icono del carrito muestra cursor pointer (Guia GDD-DDS-G-03)",
+      "tags": ["@defecto-conocido"],
+      "criterio": "Warning guia_sin_cursor_pointer (PRD P-8, §9)",
+      "prioridad": "Baja",
+      "spec": "tests/inventory/contador-carrito.spec.ts",
+      "precondicion": "Carrito vacio",
+      "pasos": [
+        "Verificar role=\"button\" del enlace (no tiene tabindex); clic → /cart.html → Continue Shopping",
+        "Hover sobre el icono y leer getComputedStyle(cursor)"
+      ],
+      "esperado": ["El icono navega al carrito", "cursor = «pointer»"],
+      "resultadoEsperadoHoy": "FALLA: cursor:auto en a.shopping_cart_link (PRD P-8). Hallazgo menor de la Guia GDD-DDS-G-03. El cursor no sale en capturas: la evidencia es la anotacion `cursor-observado`.",
+      "regla1": {
+        "negativo": "AUTOMATIZADO: el cursor no es «pointer» → falla",
+        "controles": "AUTOMATIZADO: clic fisico en el icono",
+        "bordes": "NO APLICA",
+        "copy": "NO APLICA (el icono no tiene texto; su copy es el aria-label de TC-12)"
+      },
+      "estado": "NO EJECUTADO"
+    }
+  ],
+  "observacionesFueraDeAlcance": [
+    {
+      "id": "OBS-01",
+      "descripcion": "Reset App State deja los botones desfasados: borra cart-contents y el badge, pero los productos siguen en «Remove» hasta recargar (PRD P-R). Reset no es agregar/remover: se anota, no es TC. Por esto el fixture aisla borrando localStorage y no con Reset.",
+      "evidenciaPRD": "RESET_01..RESET_05"
+    },
+    {
+      "id": "OBS-02",
+      "descripcion": "En /cart.html vacio, «Checkout» (#checkout) esta habilitado (PRD §11). Checkout fuera de alcance."
+    },
+    {
+      "id": "OBS-03",
+      "descripcion": "El menu trae «Dynamic Catalog» (#dynamic_catalog_sidebar_link), que no figura en versiones publicas anteriores (PRD §11)."
+    },
+    {
+      "id": "OBS-04",
+      "descripcion": "Estandar id_url (dos pestanas, ID por letras, duplicar pestana) sobre inventory-item.html?id=N: el detalle no es funcionalidad bajo prueba (PRD §8). Sin TC."
+    }
+  ],
+  "resumen": {
+    "total": 13,
+    "porPrioridad": { "Alta": 9, "Media": 2, "Baja": 2 },
+    "defectosConocidosModelados": ["TC-12 (aria-label «1 items»)", "TC-13 (cursor:auto)"],
+    "correr": "npx playwright test --headed"
+  }
+}
