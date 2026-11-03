@@ -7,8 +7,10 @@
     "test": "playwright test",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
+    "test:ver": "set SLOWMO=1500&& playwright test",
     "test:carrito": "playwright test --grep @carrito",
     "test:navegacion": "playwright test --grep @navegacion",
+    "test:e2e": "playwright test --grep @e2e",
     "report": "playwright show-report reports/html"
   },
   "devDependencies": {

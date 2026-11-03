@@ -14,6 +14,8 @@ export default defineConfig({
   timeout: 60_000,
   expect: { timeout: 10_000 },
   fullyParallel: true,
+  // En modo "ver" se ejecuta un test a la vez para seguirlo en una sola ventana.
+  workers: process.env.SLOWMO ? 1 : undefined,
   retries: process.env.CI ? 1 : 0,
 
   reporter: [
@@ -29,6 +31,9 @@ export default defineConfig({
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'off',
+    // Modo "ver": SLOWMO=500 abre el navegador y pausa 500 ms entre acciones.
+    headless: !process.env.SLOWMO,
+    launchOptions: { slowMo: Number(process.env.SLOWMO) || 0 },
   },
 
   projects: [
