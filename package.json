@@ -12,6 +12,7 @@
     "test:navegacion": "playwright test --grep @navegacion",
     "test:e2e": "playwright test --grep @e2e",
     "test:inventario": "playwright test --grep @inventario",
+    "test:checkout": "playwright test --grep @checkout",
     "report": "playwright show-report reports/html"
   },
   "devDependencies": {

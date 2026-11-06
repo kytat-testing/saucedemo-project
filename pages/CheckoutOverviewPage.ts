@@ -10,6 +10,7 @@ export class CheckoutOverviewPage extends BasePage {
   readonly subtotal: Locator;
   readonly impuesto: Locator;
   readonly total: Locator;
+  readonly botonFinalizar: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -17,6 +18,7 @@ export class CheckoutOverviewPage extends BasePage {
     this.subtotal = page.getByTestId('subtotal-label');
     this.impuesto = page.getByTestId('tax-label');
     this.total = page.getByTestId('total-label');
+    this.botonFinalizar = page.getByTestId('finish');
   }
 
   async expectEstaAbierta() {
@@ -33,5 +35,9 @@ export class CheckoutOverviewPage extends BasePage {
       impuesto: parsePrecio(await this.impuesto.innerText()),
       total: parsePrecio(await this.total.innerText()),
     };
+  }
+
+  async finalizar() {
+    await this.botonFinalizar.click();
   }
 }

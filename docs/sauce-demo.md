@@ -102,9 +102,9 @@ npx playwright show-report
 
 ### 🟢 D. Checkout
 
-- [ ] ZIP empty → error validation
-- [ ] First name empty → error validation
-- [ ] Last name empty → error validation
+- [x] ZIP empty → error validation
+- [x] First name empty → error validation
+- [x] Last name empty → error validation
 - [ ] Cancel checkout flow
 
 ### 🟢 E. Purchase Flow
