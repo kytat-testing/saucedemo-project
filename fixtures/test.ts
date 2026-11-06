@@ -4,6 +4,7 @@ import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
 import { CheckoutInformationPage } from '../pages/CheckoutInformationPage';
 import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage';
+import { CheckoutCompletePage } from '../pages/CheckoutCompletePage';
 import { ProductDetailPage } from '../pages/ProductDetailPage';
 import { USUARIOS } from '../data/users';
 
@@ -13,6 +14,7 @@ interface Paginas {
   cartPage: CartPage;
   checkoutInfoPage: CheckoutInformationPage;
   checkoutOverviewPage: CheckoutOverviewPage;
+  checkoutCompletePage: CheckoutCompletePage;
   productDetailPage: ProductDetailPage;
 }
 
@@ -32,6 +34,7 @@ export const test = base.extend<Paginas>({
   cartPage: async ({ page }, use) => use(new CartPage(page)),
   checkoutInfoPage: async ({ page }, use) => use(new CheckoutInformationPage(page)),
   checkoutOverviewPage: async ({ page }, use) => use(new CheckoutOverviewPage(page)),
+  checkoutCompletePage: async ({ page }, use) => use(new CheckoutCompletePage(page)),
   productDetailPage: async ({ page }, use) => use(new ProductDetailPage(page)),
 });
 
