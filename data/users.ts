@@ -6,6 +6,7 @@ export interface Usuario {
 // Credenciales publicas que la propia pagina de login muestra.
 export const USUARIOS = {
   estandar: { username: 'standard_user', password: 'secret_sauce' },
+  bloqueado: { username: 'locked_out_user', password: 'secret_sauce' },
 } satisfies Record<string, Usuario>;
 
 export const DATOS_CHECKOUT = {
